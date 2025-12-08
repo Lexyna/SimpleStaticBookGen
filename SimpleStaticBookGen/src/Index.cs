@@ -2,14 +2,18 @@ using System.Text.RegularExpressions;
 
 public class Index : IHTMLGenerator
 {
-    //public Dictionary<string, List<Chapter>> Chapters = new();
+    private List<Chapter> Chapters = new();
 
     public List<string> ChapterLayout = new();
 
     private IndexObj indexObj;
 
-    public Index(IndexObj index)
+    private string path;
+
+    public Index(IndexObj index, string path)
     {
+        this.path = path;
+
         if (index.Book == null)
         {
             Console.WriteLine("No Content found in index.json.");
@@ -191,7 +195,8 @@ public class Index : IHTMLGenerator
                 left.Add(new List<Chapter>());
                 for (int j = 0; j < book[i].Length; j++)
                 {
-                    Chapter ch = new Chapter(book[i][j], "content");
+                    Chapter ch = new Chapter(book[i][j], path);
+                    Chapters.Add(ch);
                     left[idxLeft].Add(ch);
                 }
                 idxLeft++;
@@ -201,7 +206,8 @@ public class Index : IHTMLGenerator
                 right.Add(new List<Chapter>());
                 for (int j = 0; j < book[i].Length; j++)
                 {
-                    Chapter ch = new Chapter(book[i][j], "content");
+                    Chapter ch = new Chapter(book[i][j], path);
+                    Chapters.Add(ch);
                     right[idxRight].Add(ch);
                 }
                 idxRight++;
@@ -209,6 +215,13 @@ public class Index : IHTMLGenerator
         }
 
         return (left, right);
+    }
+
+    public void CreateHTML()
+    {
+        Utils.CreateHTMLFile("", "index", GenerateSite());
+        foreach (Chapter ch in Chapters)
+            ch.CreateHTML();
     }
 
 }

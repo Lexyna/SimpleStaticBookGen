@@ -7,4 +7,6 @@ public interface IHTMLGenerator
 
     public string GenerateSite();
 
+    public void CreateHTML();
+
 }

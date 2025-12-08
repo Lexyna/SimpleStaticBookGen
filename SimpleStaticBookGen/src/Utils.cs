@@ -41,4 +41,13 @@ public static class Utils
         return head;
     }
 
+    public static void CreateHTMLFile(string path, string name, string html)
+    {
+        if (!Directory.Exists("site"))
+            Directory.CreateDirectory("site");
+
+        File.WriteAllText($"site/{name}.html", html);
+
+    }
+
 }

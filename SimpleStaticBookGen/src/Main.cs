@@ -20,13 +20,9 @@ public class Entry
             return;
         }
 
-        Index index = new Index(indexObj);
+        Index index = new Index(indexObj, path);
 
-        if (!Directory.Exists("Site"))
-            Directory.CreateDirectory("Site");
-
-        File.WriteAllText("Site/index.html", index.GenerateSite());
-
+        index.CreateHTML();
     }
 
 }
