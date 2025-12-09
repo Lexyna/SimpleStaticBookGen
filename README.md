@@ -2,6 +2,11 @@
 
 This Project automatically generates a "book-like" website (inspired by [Crafting Interpreters](https://craftinginterpreters.com/)) for a godot project.
 
+Run the program with:
+`dotnet run --project .\GodotGuideGen "path"`
+
+Where path is the path to the godot project to read. 
+
 ## Structure
 
 The contents of the Book need to be in a top level `Book` folder.
