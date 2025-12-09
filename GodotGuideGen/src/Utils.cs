@@ -41,7 +41,11 @@ public static class Utils
         head += "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css\">\n";
         head += "<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@catppuccin/highlightjs@1.0.1/css/catppuccin-macchiato.css\">\n";
         head += "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js\"></script>\n";
-        head += "<script>hljs.highlightAll();</script>";
+
+        // TODO: Provide gdscript 4.x extension for highlight.js officially
+        head += "<script src=\"gdscript.js\"></script>\n";
+
+        head += "<script>hljs.registerLanguage(\"gdscript\", GDScript);hljs.highlightAll();</script>";
         head += "<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">\n";
 
 

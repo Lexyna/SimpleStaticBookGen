@@ -2,8 +2,8 @@ using System.Text.RegularExpressions;
 
 public class ScriptObj
 {
-    private static string patternStart = "#>>\\s*([a-zA-Z-_]+)";
-    private static string patternEnd = "#<<\\s*([a-zA-Z-_]+)";
+    private static string patternStart = "#>>\\s*([a-zA-Z0-9-_]+)";
+    private static string patternEnd = "#<<\\s*([a-zA-Z0-9-_]+)";
 
     private List<string> Lines = new();
 
@@ -115,7 +115,7 @@ public class ScriptObj
         List<string> lines = blocks[blockId].Item1;
 
         snippet += "<pre class=\"snippet-main\">\n";
-        snippet += "<code>\n";
+        snippet += "<code class=\"language-gdscript\">\n";
 
         for (int i = 0; i < lines.Count; i++)
         {

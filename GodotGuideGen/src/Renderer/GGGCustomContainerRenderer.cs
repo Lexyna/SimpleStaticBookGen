@@ -7,7 +7,7 @@ using Markdig.Syntax;
 public class GGGCustomContainerRenderer : HtmlObjectRenderer<CustomContainer>
 {
     //Matches the format: {id}:{num}:{num}:{text}
-    private static string pattern = "([a-zA-Z-_]+):([0-9]+):([0-9]+):?([a-zA-Z\\s*.-_]*)$";
+    private static string pattern = "([a-zA-Z0-9-_]+):([0-9]+):([0-9]+):?([a-zA-Z\\s*.-_']*)$";
 
     private static string ATTR_CODE = "code";
 
