@@ -200,9 +200,16 @@ nav li small {
   float: right;
 }
 
+nav.toc h1 {
+  font-weight: 400;
+  margin: 0 0 40px 0;
+  font-size: 38px;
+}
+
 nav.toc h2 {
-  font-weight: 500;
+  font-weight: 400;
   margin: 0;
+  font-size: 25px;
 }
 
 nav.toc .contents {

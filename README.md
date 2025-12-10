@@ -14,8 +14,9 @@ Each Chapter is represented by a `.md` file and a `index.json` file containing t
 
 ### `Index.json`
 
-```json
+```
 {
+    "ProjectName": "Name of the Project",
     "Book"[
         [], #Represents The first Section of the Book 
         [], #Represents The second Section of the Book

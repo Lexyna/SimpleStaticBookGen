@@ -12,6 +12,7 @@ using Markdig.Syntax;
 
 public class Chapter : IHTMLGenerator
 {
+    private string ProjectName { get; set; }
     public string FileName { get; private set; }
     public string? Title { get; private set; }
 
@@ -26,8 +27,9 @@ public class Chapter : IHTMLGenerator
     private string? prev, next;
     private string? prevLink, nextLink;
 
-    public Chapter(string FileName, string path)
+    public Chapter(string projectName, string FileName, string path)
     {
+        this.ProjectName = projectName;
         this.FileName = FileName;
         this.path = path;
 
@@ -85,6 +87,7 @@ public class Chapter : IHTMLGenerator
 
         string navBar = "<nav class=\"toc\">\n";
         navBar += "<div class=\"contents\">\n";
+        navBar += $"<h1>{ProjectName}</h1>\n";
         navBar += $"<h2><small>{Title}</small></h2>\n";
         navBar += "<ul>";
 
@@ -151,7 +154,7 @@ public class Chapter : IHTMLGenerator
 
         string title = Title != null ? Title : FileName;
 
-        site += Utils.GenerateHead(title);
+        site += Utils.GenerateHead(this.ProjectName + " - " + title);
 
         site += GenerateBody();
 

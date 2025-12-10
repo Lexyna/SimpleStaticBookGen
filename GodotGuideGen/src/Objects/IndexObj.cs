@@ -3,6 +3,7 @@
 */
 public class IndexObj
 {
+    public string ProjectName { get; set; } = "";
 
     public string[][]? Book { get; set; }
 

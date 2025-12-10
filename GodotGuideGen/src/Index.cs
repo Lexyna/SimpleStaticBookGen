@@ -9,6 +9,8 @@ public class Index : IHTMLGenerator
 
     private IndexObj? indexObj;
 
+    private string projectName;
+
     private string path;
 
     public Index(IndexObj index, string path)
@@ -22,6 +24,7 @@ public class Index : IHTMLGenerator
         }
 
         this.indexObj = index;
+        projectName = indexObj.ProjectName;
 
         for (int i = 0; i < index.Book.GetLength(0); i++)
         {
@@ -35,7 +38,7 @@ public class Index : IHTMLGenerator
 
         site += "<html>";
 
-        site += Utils.GenerateHead("Table of Contents");
+        site += Utils.GenerateHead($"{indexObj?.ProjectName} - Table of Contents");
 
         site += GenerateBody();
 
@@ -48,6 +51,8 @@ public class Index : IHTMLGenerator
         string navBar = "<nav class=\"toc\">\n";
 
         navBar += "<div class=\"contents\">\n";
+
+        navBar += $"<h1>{projectName}</h1>\n";
 
         navBar += "<h2><small>Table of Contents</small></h2>\n";
 
@@ -237,7 +242,7 @@ public class Index : IHTMLGenerator
                 left.Add(new List<Chapter>());
                 for (int j = 0; j < book[i].Length; j++)
                 {
-                    Chapter ch = new Chapter(book[i][j], path);
+                    Chapter ch = new Chapter(projectName, book[i][j], path);
                     Chapters.Add(ch);
                     left[idxLeft].Add(ch);
                 }
@@ -248,7 +253,7 @@ public class Index : IHTMLGenerator
                 right.Add(new List<Chapter>());
                 for (int j = 0; j < book[i].Length; j++)
                 {
-                    Chapter ch = new Chapter(book[i][j], path);
+                    Chapter ch = new Chapter(projectName, book[i][j], path);
                     Chapters.Add(ch);
                     right[idxRight].Add(ch);
                 }
