@@ -4,6 +4,18 @@
 [This](https://github.com/Lexyna/GodotGuideGen) being the project in question
 :::
 
+This hsould be a part snippet:
+
+:::code
+part_snippet:5:3:This is only small a part of the main file
+:::
+
+and this shiould be the full snippet
+
+:::code
+full_snippet:5:3:This is only small a part of the main file
+:::
+
 This file serves as a primary example for all the features included in this project.
 
 One very neat feature is, the project can automatically insert and highligh code blocks, liks this:

@@ -11,6 +11,18 @@ class_name MyClass
 # Inheritance:
 extends BaseClass
 
+#>> full_snippet part_snippet
+func my_function() -> void:
+    var idx: int = 0
+##<< part_snippet
+
+    if idx > 0:
+      GD.Print("Idx is %s" % idx)
+      
+#>> part_snippet    
+    pass
+##<< full_snippet part_snippet
+
 #>> init init2 init3 Block56 and_this_test
 # Member variables.
 var a = 5
@@ -20,7 +32,7 @@ var dict = {"key": "value", 2: 3}
 var other_dict = {key = "value", other_key = 2}
 var typed_var: int
 var inferred_type := "String"
-##<< init init2 init3 Block56 and_this_test´´
+##<< init init2 init3 Block56 and_this_test
 
 # Constants.
 const ANSWER = 42

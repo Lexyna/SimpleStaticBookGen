@@ -2,13 +2,28 @@ using System.Text.RegularExpressions;
 
 public class ScriptObj
 {
-  //private static string patternStart = "#>>\\s*([a-zA-Z0-9-_]+)";
+  public class SnippetIdx
+  {
+    public int start { get; private set; }
+    public int end { get; private set; }
+    public SnippetIdx(int start)
+    {
+      this.start = start;
+    }
+
+    public void SetEndIdx(int end)
+    {
+      this.end = end;
+    }
+
+  }
+
   private static string patternStart = "#>>\\s*([a-zA-Z0-9-_]+\\s?)+";
   private static string patternEnd = "#<<\\s*([a-zA-Z0-9-_]+\\s?)+";
 
   private List<string> Lines = new();
 
-  public Dictionary<string, (List<string>, int)> blocks = new();
+  public Dictionary<string, (List<string>, SnippetIdx)> blocks = new();
 
   public string FileName { get; private set; }
 
@@ -77,8 +92,9 @@ public class ScriptObj
       foreach (var block in currentBlocks)
       {
         if (!blocks.ContainsKey(block))
-          blocks.Add(block, (new List<string>(), lineIdx));
+          blocks.Add(block, (new List<string>(), new SnippetIdx(lineIdx)));
         blocks[block].Item1.Add(line);
+        blocks[block].Item2.SetEndIdx(lineIdx);
       }
 
       lineIdx++;
@@ -90,15 +106,15 @@ public class ScriptObj
   {
     string snippet = "";
 
-    int start = blocks[blockId].Item2;
-    int blockLength = blocks[blockId].Item1.Count;
+    int start = blocks[blockId].Item2.start;
+    int end = blocks[blockId].Item2.end;
 
     snippet += "<div class=\"snippet\">\n";
     if (before > 0)
       snippet += SnippetBefore(start, before);
     snippet += SnippetMain(blockId, displayText);
     if (after > 0)
-      snippet += SnippetAfter(start + blockLength, after);
+      snippet += SnippetAfter(end, after);
 
     snippet += "</div>\n";
 
@@ -160,18 +176,18 @@ public class ScriptObj
     return snipperBefore;
   }
 
-  private string SnippetAfter(int start, int after)
+  private string SnippetAfter(int end, int after)
   {
     string snippetAfter = "";
 
-    int startLine = start;
+    int endLine = end;
 
-    if (startLine < 1 || startLine + after >= Lines.Count) return snippetAfter;
+    if (endLine < 1 || endLine + after >= Lines.Count) return snippetAfter;
 
     snippetAfter += "<pre class=\"snippet-after\">\n";
     snippetAfter += "<code>\n";
 
-    for (int i = startLine; i < startLine + after - 1; i++)
+    for (int i = endLine; i < endLine + after - 1; i++)
     {
       snippetAfter += Lines[i] + "\n";
     }
