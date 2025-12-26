@@ -11,7 +11,7 @@ class_name MyClass
 # Inheritance:
 extends BaseClass
 
-#>> init
+#>> init init2 init3 Block56 and_this_test
 # Member variables.
 var a = 5
 var s = "Hello"
@@ -20,7 +20,7 @@ var dict = {"key": "value", 2: 3}
 var other_dict = {key = "value", other_key = 2}
 var typed_var: int
 var inferred_type := "String"
-##<< init
+##<< init init2 init3 Block56 and_this_test´´
 
 # Constants.
 const ANSWER = 42
